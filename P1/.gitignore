@@ -1,0 +1,11 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+
+# Registros de ejecución del scraper
+data/*.log

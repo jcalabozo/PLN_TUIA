@@ -1,0 +1,176 @@
+[
+  {
+    "id": "q01",
+    "consulta": "un colegio donde los jóvenes aprenden magia",
+    "relevantes": [
+      "Harry Potter y la piedra filosofal",
+      "Harry Potter y la cámara secreta",
+      "Harry Potter y la orden del fénix",
+      "Harry Potter. La colección completa",
+      "El temor de un hombre sabio"
+    ],
+    "tipo": "trama",
+    "criterio": "La sinopsis cuenta que el protagonista estudia en una escuela o universidad de magia."
+  },
+  {
+    "id": "q02",
+    "consulta": "jóvenes obligados a participar en una competencia a muerte",
+    "relevantes": [
+      "Los juegos del hambre",
+      "Trilogía Los juegos del hambre",
+      "Battle Royale",
+      "La larga marcha",
+      "Trono de cristal"
+    ],
+    "tipo": "trama",
+    "criterio": "La trama central es una competencia o juego forzado en el que los participantes mueren hasta que queda un ganador."
+  },
+  {
+    "id": "q03",
+    "consulta": "una pandemia diezma a la población mundial",
+    "relevantes": [
+      "Apocalipsis",
+      "Soy leyenda",
+      "Ensayo sobre la ceguera"
+    ],
+    "tipo": "sin palabras en común",
+    "criterio": "Una enfermedad o epidemia que se propaga entre las personas y devasta a la sociedad."
+  },
+  {
+    "id": "q04",
+    "consulta": "un asesino en serie y la investigación para atraparlo",
+    "relevantes": [
+      "El Cuarto Mono",
+      "El silencio de la ciudad blanca",
+      "El guardián invisible",
+      "La novia gitana",
+      "No soy un serial killer",
+      "El jardín de las mariposas"
+    ],
+    "tipo": "trama",
+    "criterio": "Un asesino que mata a varias víctimas y alguien (policía, detective o un particular) lo investiga."
+  },
+  {
+    "id": "q05",
+    "consulta": "una historia de amor prohibido o imposible",
+    "relevantes": [
+      "Prohibido",
+      "Palmeras en la nieve",
+      "Los siete maridos de Evelyn Hugo",
+      "Hush, Hush",
+      "Todo lo que nunca fuimos",
+      "Como agua para chocolate",
+      "El juego del ángel",
+      "La selección",
+      "Te doy mi corazón"
+    ],
+    "tipo": "temática",
+    "criterio": "La sinopsis presenta la relación amorosa como prohibida o imposible por la familia, la clase social o las normas."
+  },
+  {
+    "id": "q06",
+    "consulta": "saga familiar latinoamericana con elementos mágicos",
+    "relevantes": [
+      "Cien años de soledad (Edición conmemorativa)",
+      "Cien años de soledad (Ed. Ilustrada)",
+      "La casa de los espíritus",
+      "Como agua para chocolate",
+      "Nuestra parte de noche"
+    ],
+    "tipo": "temática",
+    "criterio": "Historia de una familia a lo largo del tiempo, ambientada en Latinoamérica, con elementos sobrenaturales o mágicos."
+  },
+  {
+    "id": "q07",
+    "consulta": "a creepy mansion haunted by ghosts",
+    "relevantes": [
+      "La maldición de Hill House",
+      "El resplandor",
+      "El misterio de Salem’s Lot",
+      "El cuento número trece"
+    ],
+    "tipo": "en otro idioma (sin palabras en común)",
+    "criterio": "Una casa, mansión u hotel con presencias sobrenaturales o fantasmales."
+  },
+  {
+    "id": "q08",
+    "consulta": "novelas sobre el amor por los libros y la lectura",
+    "relevantes": [
+      "La sombra del viento",
+      "El juego del ángel",
+      "El Laberinto de los Espíritus",
+      "La ladrona de libros",
+      "Fahrenheit 451",
+      "La Historia Interminable – Color",
+      "El cuento número trece"
+    ],
+    "tipo": "temática",
+    "criterio": "Los libros o la lectura son un tema central de la trama."
+  },
+  {
+    "id": "q09",
+    "consulta": "ensayos sobre política latinoamericana",
+    "relevantes": [
+      "El libro negro de la Nueva Izquierda",
+      "El fin de la inflación",
+      "La máquina de matar",
+      "Sinceramente",
+      "El engaño populista",
+      "Últimas noticias del nuevo idiota iberoamericano",
+      "Pinochet"
+    ],
+    "tipo": "temática",
+    "criterio": "No ficción sobre política, economía o figuras políticas de Latinoamérica."
+  },
+  {
+    "id": "q10",
+    "consulta": "un viaje en el tiempo",
+    "relevantes": [
+      "Antes de que se enfríe el café",
+      "Jerusalén"
+    ],
+    "tipo": "trama",
+    "criterio": "Los personajes viajan al pasado o al futuro."
+  },
+  {
+    "id": "q11",
+    "consulta": "criaturas que beben sangre",
+    "relevantes": [
+      "Entrevista con el vampiro",
+      "Las dos muertes",
+      "Soy leyenda",
+      "El misterio de Salem’s Lot"
+    ],
+    "tipo": "sin palabras en común",
+    "criterio": "Los vampiros son un elemento central de la trama."
+  },
+  {
+    "id": "q12",
+    "consulta": "un gobierno totalitario que vigila y controla a la población",
+    "relevantes": [
+      "1984",
+      "1984 (Trad. Miguel Temprano García)",
+      "Rebelión en la granja (trad. Marcial Souto y Miguel Temprano García)",
+      "Rebelión en la granja",
+      "Fahrenheit 451",
+      "El cuento de la criada",
+      "Battle Royale",
+      "La larga marcha",
+      "Trilogía Los juegos del hambre",
+      "Sinsajo"
+    ],
+    "tipo": "temática",
+    "criterio": "La sinopsis describe como tema central un régimen totalitario o de control estatal sobre la población."
+  },
+  {
+    "id": "q13",
+    "consulta": "un crimen misterioso en un lugar aislado del que nadie puede salir",
+    "relevantes": [
+      "Asesinato en el Orient Express",
+      "Diez negritos",
+      "El nombre de la rosa"
+    ],
+    "tipo": "trama",
+    "criterio": "Un asesinato que se investiga en un lugar cerrado o aislado (tren, isla, abadía)."
+  }
+]

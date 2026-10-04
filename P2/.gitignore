@@ -1,0 +1,17 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Credenciales de la base (Supabase): nunca se suben
+.env
+
+# Modelos descargados y embeddings cacheados (pesados; se regeneran)
+models/
+data/*.npy
+data/*.zip

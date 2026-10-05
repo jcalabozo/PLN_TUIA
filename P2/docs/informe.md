@@ -69,20 +69,41 @@ Representamos las sinopsis de los 200 libros del TP1 ("Los más comentados" de L
 
 Descartamos los promedios de palabras. El **Word2Vec propio** no aprende significado con 200 sinopsis: los vecinos de "guerra" son *kaladin* o *radiantes*, palabras de un solo libro. Con **SBW**, todo se parece a todo: dos libros al azar tienen una similitud de 0,87 ± 0,04.
 
-## 7. Otros hallazgos
+## 7. Parte avanzada: clustering
+
+**Pregunta:** ¿el espacio de embeddings reconstruye la taxonomía de géneros sin haberla visto?
+
+**Método:** K-Means con K = 7 sobre los vectores de cada modelo. Como el problema es multi-etiqueta, comparamos contra un **género de referencia** por libro: el más frecuente del corpus entre los suyos, sin contar "Novela". La comparación se hace sobre los 168 libros de los 7 géneros de referencia que tienen al menos 8 libros. Medimos ARI y V-measure, y el piso con clusters asignados al azar.
+
+| | Azar | TF-IDF | W2V propio | SBW | SBERT | E5 |
+|---|---|---|---|---|---|---|
+| ARI | 0,001 | 0,036 | 0,063 | 0,065 | **0,200** | 0,172 |
+| V-measure | 0,063 | 0,114 | 0,167 | 0,195 | **0,299** | 0,267 |
+| Pares de una misma saga en el mismo cluster | 15–19 % | 54 % | 89 % | 83 % | 57 % | 77 % |
+
+- **Los modelos de oración reconstruyen mejor los géneros, pero ninguno lo logra.** Un ARI de 0,20 es una coincidencia apenas parcial.
+- **Solo un cluster coincide con un género** (figura 1): el de fantasía épica, con 93 % de Fantástico (*Juego de tronos*, *El último deseo*, *La comunidad del anillo*). En los demás, el género más frecuente no llega al 50 %: Romántico 48 %, Ciencia ficción 41 %, Intriga 38 %.
+- **Los clusters agrupan por tema más que por etiqueta.** Uno junta ensayos políticos con distopías y dramas históricos, porque comparten temas como el poder, el Estado y la violencia.
+- **Los promedios de palabras agrupan por saga:** comparten nombres propios y vocabulario (*Feyre*, *Katniss*, *alomancia*). SBERT agrupa más por género. Para un recomendador de "más libros como este", con SBW o con el Word2Vec propio el resultado sería casi siempre la misma saga.
+- **La multi-etiqueta penaliza a un clustering duro.** K-Means asigna un solo grupo por libro, y la etiqueta de referencia también elige un solo género. Un libro fantástico y romántico que cae en el cluster de romance cuenta como error, aunque el agrupamiento tenga sentido. Además, con otra regla para elegir el género de referencia, los números cambiarían.
+
+![Composición de los clusters de SBERT](figuras/clustering_composicion.png)
+
+*Figura 1. Composición de los clusters de SBERT: porcentaje de los libros de cada cluster que tiene cada género de referencia. Un libro suma en todos sus géneros.*
+
+## 8. Otros hallazgos
 
 - **Truncado silencioso:** `distiluse` no avisa que corta el texto. Hay que tokenizar cada sinopsis para saberlo, y en las truncadas no ve, en promedio, el 39 % final.
 - **El corpus de entrenamiento se nota:** en SBW, los vecinos de "familia" son familias biológicas (*Bochicidae*, *Eburia*), por los textos de especies con que se entrenó.
 - **Espacios concentrados:** con E5, dos libros cualesquiera tienen una similitud de entre 0,75 y 0,89. El orden relativo sirve, pero el valor absoluto no se puede usar como umbral de relevancia.
-- **Clustering (parte avanzada):** con K-Means (K = 7), SBERT es el que mejor reconstruye los géneros (ARI 0,20, contra 0,001 de clusters al azar), pero lejos de 1. Agrupa por tema (fantasía épica, thrillers psicológicos, romance juvenil, distopías y política) más que por etiqueta editorial. Los modelos de promedio de palabras agrupan por **saga**: ponen en el mismo cluster al 83–89 % de los pares de libros de una misma serie. La multi-etiqueta penaliza a un clustering duro, que solo puede asignar un grupo por libro.
 - **Los géneros vienen en orden alfabético** en el corpus: "el primer género" no es el principal, y no lo usamos como etiqueta.
 
-## 8. Limitaciones y pendientes
+## 9. Limitaciones y pendientes
 
 - **Fase 2 pendiente:** persistencia en pgvector con índice HNSW, búsqueda en SQL con filtro por género y la base en Supabase. Los vectores ya están normalizados y sin valores no finitos, y `buscar()` tiene la firma de la versión en SQL.
 - **Pocas consultas:** 13 consultas dan una evaluación ruidosa. Más consultas, y juicios de relevancia hechos por más de una persona, harían las comparaciones más confiables.
 
-## 9. Uso de asistentes de IA
+## 10. Uso de asistentes de IA
 
 > ⚠️ **Para que el grupo lo revise y lo complete antes de entregar.**
 

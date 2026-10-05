@@ -21,7 +21,11 @@ El TP pide representar las sinopsis del corpus del TP1 con **embeddings** (palab
 
 ## Estado del avance
 
-Notebook: [`TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb`](../TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb) (ejecutado, con las salidas visibles).
+- **Notebook:** [`TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb`](../TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb), ejecutado y con las salidas visibles.
+- **Consultas:** [`queries.json`](../queries.json).
+- **Borrador del informe:** [informe.md](informe.md).
+
+**La fase 1 está completa.** Falta la fase 2: las partes E y F y la base en Supabase.
 
 | Parte | Estado |
 |---|---|
@@ -29,23 +33,29 @@ Notebook: [`TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb`](../TP2_calabozo_giunto
 | A · Corpus en dos versiones | ✅ |
 | Línea de base TF-IDF y `buscar(consulta, modelo, k, genero)` | ✅ |
 | B · Word2Vec propio contra SBW | ✅ |
-| C · SBERT (`distiluse`) y truncado | ✅ |
-| D · Similitudes al azar, prueba de las ediciones y proyección 2D | ✅ |
-| D · Rankings lado a lado para 3 consultas | ⏳ Necesita `queries.json` |
-| Evaluación con precision@k | ⏳ Código listo; necesita `queries.json` |
-| E, F · pgvector y SQL | ⏳ Fase 2 |
-| Parte avanzada | ⏳ A definir |
+| C · SBERT (`distiluse`) y e5-small, con el truncado de cada uno | ✅ |
+| D · Similitudes al azar, ediciones repetidas, proyección 2D y rankings lado a lado | ✅ |
+| `queries.json` (13 consultas) y evaluación con precision@5 | ✅ |
+| Dos casos de falla analizados | ✅ |
+| Parte avanzada: clustering | ✅ |
+| Borrador del informe | ✅ Falta la fase 2, la revisión del grupo y pasarlo a PDF |
+| E, F · pgvector, HNSW y SQL | ⏳ Fase 2 |
 
-**Hallazgos hasta ahora** (detallados en el notebook):
-- **SBERT trunca 178 de las 200 sinopsis (89 %)** con su límite de 128 tokens, y en las truncadas no ve, en promedio, el 39 % final del texto.
-- **El Word2Vec propio aprende co-ocurrencias de cada libro, no significado.** Los vecinos de "guerra" salen todos de una sola saga de Sanderson.
-- **SBW tiene el sesgo de su corpus:** los vecinos de "familia" son familias biológicas.
-- **Con SBW, todo se parece a todo:** dos libros al azar dan 0,87 de similitud media, con un desvío de 0,04. SBERT es el espacio más repartido (0,22 ± 0,09).
-- **TF-IDF encuentra las cinco ediciones repetidas en el puesto 1**, por los nombres propios compartidos (*Winston*, *Smith*). Es un caso legítimo donde TF-IDF gana.
-- **En PCA, solo SBERT muestra regiones por género** (Fantástico, Romántico, Ciencia ficción). En TF-IDF, las dos componentes capturan solo duplicados.
-- **Los términos característicos de TF-IDF no se estabilizan con 200 sinopsis.** Además, el 88 % de los top 10 tienen empates que hay que desempatar de forma fija.
+**Resultados principales** (detallados en el notebook y en el informe):
 
-**Próximo paso: escribir `queries.json`** (ver la sección 6 y el [listado del corpus](listado_corpus.md)). Con eso se completan los rankings de la parte D y la evaluación.
+- **precision@5 promedio:** SBERT y E5 0,400; TF-IDF 0,385; SBW 0,338; Word2Vec propio 0,277; azar 0,027. **Los modelos de oración empatan con TF-IDF**: la diferencia es de un solo libro en 65 posiciones evaluadas.
+- **Sin palabras en común**, TF-IDF saca 0 y SBERT 0,40. **Con vocabulario compartido**, TF-IDF es muy fuerte: saca 1,0 en "amor prohibido".
+- **`distiluse` trunca 178 de 200 sinopsis (89 %)**; **e5-small**, con 512 tokens de límite, solo 3.
+- **El Word2Vec propio aprende co-ocurrencias de cada libro, no significado.** Con SBW, todo se parece a todo (0,87 ± 0,04 entre libros al azar).
+- **Casos de falla:** con "el amor por los libros", SBERT y E5 devuelven solo novelas románticas. Con "un crimen en un lugar aislado", fallan todos.
+- **Clustering:** SBERT reconstruye mejor los géneros (ARI 0,20), pero lejos de 1. Los promedios de palabras agrupan por saga.
+
+**Próximos pasos:**
+
+1. **El grupo revisa `queries.json`:** las consultas, los criterios y los casos límite, como *Cadáver exquisito* en q03. Si se cambia algo, se reejecuta la evaluación.
+2. **El grupo revisa y completa el informe**, en especial el párrafo de uso de IA.
+3. **Fase 2**, cuando llegue el material: Supabase, partes E y F.
+4. Pasar el informe a PDF, en hasta 3 páginas.
 
 ## 2. Qué tenemos y qué falta
 
@@ -216,10 +226,12 @@ Lo que pide: una tabla por modelo (`vector(300)` para word vectors, `vector(512)
 - **k de precision@k:** 5 (es un parámetro del notebook).
 - **Promedio de word vectors para la fase 2:** SBW. La parte B mostró que el Word2Vec propio no aprende significado con 200 sinopsis.
 
+- **Parte avanzada:** clustering.
+- **Segundo modelo de oración:** e5-small. Con su límite de 512 tokens evita casi todo el truncado de la parte C.
+- **`queries.json`:** 13 consultas, con el criterio de relevancia escrito en cada una, definidas leyendo las sinopsis y commiteadas antes de correr la evaluación.
+
 **Pendientes:**
-1. **Parte avanzada:** Clustering o Recomendación. Las dos se pueden hacer en la fase 1; la decisión puede esperar a la evaluación.
-2. **Segundo modelo de oración:** ¿agregamos e5-small, además de `distiluse`? Su límite de 512 tokens evitaría casi todo el truncado de la parte C.
-3. **Reparto del trabajo** entre los cuatro integrantes (sección 10).
+1. **Reparto del trabajo** de lo que queda (revisión, fase 2 e informe) entre los cuatro integrantes.
 
 ## 9. Preguntas para la cátedra
 

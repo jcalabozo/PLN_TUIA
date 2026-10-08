@@ -88,7 +88,7 @@ partes = [
     "> Generado con [`src/listado_corpus.py`](../src/listado_corpus.py) a partir de "
     f'`P1/data/libros.csv` ({len(libros)} libros, categoría "Los más comentados" de '
     "Lectulandia). Sirve para escribir `queries.json`: elegir consultas y decidir qué libros son relevantes "
-    "para cada una. Ver la sección 6 del [plan de trabajo](plan_de_trabajo.md).",
+    "para cada una.",
     COMO_USARLO,
     "## ⚠️ Libros repetidos",
     "Estos pares son **el mismo libro** con otro título o en otra edición. Si un libro de un par es relevante "

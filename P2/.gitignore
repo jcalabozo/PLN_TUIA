@@ -8,7 +8,7 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# Credenciales de la base (Supabase): nunca se suben
+# Variables de entorno locales: nunca se suben
 .env
 
 # Modelos descargados y embeddings cacheados (pesados; se regeneran)

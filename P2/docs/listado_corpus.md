@@ -1,6 +1,6 @@
 # Listado del corpus del TP2
 
-> Generado a partir de `P1/data/libros.csv` (200 libros, categoría "Los más comentados" de Lectulandia). Sirve para escribir `queries.json`: elegir consultas y decidir qué libros son relevantes para cada una. Ver la sección 6 del [plan de trabajo](plan_de_trabajo.md).
+> Generado con [`src/listado_corpus.py`](../src/listado_corpus.py) a partir de `P1/data/libros.csv` (200 libros, categoría "Los más comentados" de Lectulandia). Sirve para escribir `queries.json`: elegir consultas y decidir qué libros son relevantes para cada una. Ver la sección 6 del [plan de trabajo](plan_de_trabajo.md).
 
 ## Cómo usarlo
 

@@ -175,7 +175,6 @@ Las dos tablas de embeddings tienen que ser de **familias distintas**: un promed
 ### Requisitos técnicos
 
 - [ ] Word2Vec propio comparado contra `SBW-vectors-300-min5`, con vecinos lado a lado  
-- [ ] Dos familias de embeddings persistidas en `pgvector`, con índice HNSW  
 - [ ] Vectores normalizados, con manejo explícito de vectores nulos o `NaN`  
 - [ ] La *opclass* del índice corresponde al operador de distancia usado  
 - [ ] Una proyección 2D del corpus, con su advertencia metodológica  

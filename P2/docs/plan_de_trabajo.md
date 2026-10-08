@@ -1,8 +1,8 @@
 # Plan de trabajo — TP2: embeddings y búsqueda semántica
 
-> Documento vivo: se actualiza a medida que avanzamos o que la cátedra comparte material. Última actualización: 2026-10-07.
+> Documento vivo: se actualiza a medida que avanzamos o que la cátedra comparte material. Última actualización: 2026-10-08.
 >
-> Enunciado: [Enunciado_TP2_embeddings.md](../Enunciado_TP2_embeddings.md) · Notebook: [TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb](../TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb) · Listado del corpus: [listado_corpus.md](listado_corpus.md)
+> Enunciado: [Enunciado_TP2_embeddings.md](../enunciado/Enunciado_TP2_embeddings.md) (con las marcas en rojo de la cátedra: [docx](../enunciado/Enunciado_TP2_embeddings_marcado.docx)) · Notebook: [TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb](../TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb) · Listado del corpus: [listado_corpus.md](listado_corpus.md)
 >
 > Los apuntes de la materia (exportados de Notion) y las prácticas resueltas están en [jcalabozo/tuia-nlp](https://github.com/jcalabozo/tuia-nlp).
 >
@@ -24,31 +24,31 @@ El TP pide representar las sinopsis del corpus del TP1 con **embeddings** (palab
 ## Estado del avance
 
 - **Notebook:** [`TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb`](../TP2_calabozo_giuntoli_darruiz_dicarlo.ipynb), ejecutado y con las salidas visibles.
-- **Consultas:** [`queries.json`](../queries.json).
+- **Consultas:** [`queries.json`](../data/queries.json).
 - **Borrador del informe:** [informe.md](informe.md).
+- **Instalación y ejecución:** [README](../README.md).
 
-**El notebook está completo.** Faltan la revisión del grupo, el informe en PDF y confirmar si se pide otra parte avanzada (sección 7).
+**El notebook está completo.** El 2026-10-08 se reordenó en secciones 1 a 8, con código más simple y basado en el material de U1 y U2. Faltan la revisión del grupo, el informe en PDF y confirmar si se pide otra parte avanzada (sección 7).
 
 | Parte | Estado |
 |---|---|
-| 0 · Análisis inicial (las cuatro preguntas) | ✅ |
-| A · Corpus en dos versiones | ✅ |
-| Línea de base TF-IDF y `buscar(consulta, modelo, k, genero)` | ✅ |
-| B · Word2Vec propio contra SBW | ✅ |
-| C · SBERT (`distiluse`) y e5-small, con el truncado de cada uno | ✅ |
-| D · Similitudes al azar, ediciones repetidas, proyección 2D y rankings lado a lado | ✅ |
-| `queries.json` (13 consultas) y evaluación con precision@5 | ✅ |
-| Dos casos de falla analizados | ✅ |
+| 2 · Análisis inicial (las cuatro preguntas del enunciado) | ✅ |
+| 3 · Corpus en dos versiones (parte A) | ✅ |
+| 4 · Línea de base TF-IDF y `buscar(consulta, modelo, k, genero)` | ✅ |
+| 5 · Word2Vec propio contra SBW (parte B) | ✅ |
+| 6 · SBERT (`distiluse`) y e5-small, con el truncado de cada uno (parte C) | ✅ |
+| 7 · Similitudes entre libros, ediciones repetidas, proyección 2D (PCA y t-SNE) y rankings lado a lado (parte D) | ✅ |
+| 8 · `queries.json` (13 consultas), precision@5 y dos casos de falla | ✅ |
 | Parte avanzada | ❓ El clustering quedó afuera (backup en tuia-nlp). Falta confirmar si se pide Recomendación o Doc2Vec |
 | Borrador del informe | ✅ Falta la revisión del grupo y pasarlo a PDF |
 | E, F · pgvector, HNSW y SQL | ❌ Fuera del alcance |
 
 **Resultados principales** (detallados en el notebook y en el informe):
 
-- **precision@5 promedio:** SBERT y E5 0,400; TF-IDF 0,385; SBW 0,338; Word2Vec propio 0,277; azar 0,027. **Los modelos de oración empatan con TF-IDF**: la diferencia es de un solo libro en 65 posiciones evaluadas.
+- **precision@5 promedio:** SBERT y E5 0,400; TF-IDF 0,385; SBW 0,323; Word2Vec propio 0,277; azar 0,027. **Los modelos de oración empatan con TF-IDF**: la diferencia es de un solo libro en 65 posiciones evaluadas.
 - **Sin palabras en común**, TF-IDF saca 0 y SBERT 0,40. **Con vocabulario compartido**, TF-IDF es muy fuerte: saca 1,0 en "amor prohibido".
 - **`distiluse` trunca 178 de 200 sinopsis (89 %)**; **e5-small**, con 512 tokens de límite, solo 3.
-- **El Word2Vec propio aprende co-ocurrencias de cada libro, no significado.** Con SBW, todo se parece a todo (0,87 ± 0,04 entre libros al azar).
+- **El Word2Vec propio aprende co-ocurrencias de cada libro, no significado.** Con SBW, todo se parece a todo (0,89 ± 0,04 entre dos libros cualesquiera).
 - **Casos de falla:** con "el amor por los libros", SBERT y E5 devuelven solo novelas románticas. Con "un crimen en un lugar aislado", fallan todos.
 
 **Próximos pasos:**
@@ -63,7 +63,7 @@ El TP pide representar las sinopsis del corpus del TP1 con **embeddings** (palab
 | Material | Estado |
 |---|---|
 | Corpus (`P1/data/libros.csv`) | ✅ 200 libros, 13 columnas |
-| Entorno (`P2/requirements.txt`) | ✅ gensim, sentence-transformers, nltk y `langdetect` (Unidad 3). `psycopg`, `pgvector` y `python-dotenv` eran para la parte E: se pueden sacar |
+| Entorno (`P2/requirements.txt`) | ✅ gensim, sentence-transformers, nltk y `langdetect` (Unidad 3). Instalación en el [README](../README.md) |
 | Modelo `SBW-vectors-300-min5` (~1 GB) | ✅ Bajado en `P2/models/` (ignorado por git) desde [SBWCE](https://cs.famaf.unc.edu.ar/~ccardellino/SBWCE/SBW-vectors-300-min5.bin.gz) |
 | **Notebook guía** `TP2_embeddings_busqueda_semantica.ipynb` | ❌ **No fue compartido** (ver abajo) |
 | Fecha de entrega | ❌ El enunciado la deja en blanco |
@@ -79,8 +79,8 @@ Todo indica que la guía existe y no se compartió. El bloque mal pegado al prin
 | Cargar SBW con gensim y ver vecinos | Apunte U2, sección *Word2Vec* (`KeyedVectors.load_word2vec_format`, `most_similar`) |
 | Entrenar Word2Vec propio | Apunte U2, sección *Word2Vec* (`Word2Vec(sentences, vector_size, window, min_count, sg)`) |
 | Embeddings de oración con `distiluse` | Apunte U2, sección *Sentence-BERT* |
-| Buscar, recomendar, clustering, PCA y t-SNE sobre Lectulandia | Práctica *Embeddings semánticos* de U2 ([resuelta en tuia-nlp](https://github.com/jcalabozo/tuia-nlp/blob/main/U2/practicas/practica_embeddings_semanticos_resuelta.ipynb)) |
-| TF-IDF y sus parámetros | Práctica *Vectorización frecuentista* de U2 ([resuelta en tuia-nlp](https://github.com/jcalabozo/tuia-nlp/blob/main/U2/practicas/practica_vectorizacion_frecuentista_resuelta.ipynb)) |
+| Buscar, recomendar, clustering, PCA y t-SNE sobre Lectulandia | Práctica *Embeddings semánticos* de U2 ([original](https://github.com/jcalabozo/tuia-nlp/blob/main/U2/practicas/practica_embeddings_semanticos.ipynb)) |
+| TF-IDF y sus parámetros | Práctica *Vectorización frecuentista* de U2 ([original](https://github.com/jcalabozo/tuia-nlp/blob/main/U2/practicas/practica_vectorizacion_frecuentista.ipynb)) |
 | `util.semantic_search` y un recomendador | Práctica de U3, sección 6 (ejercicio 6.4) |
 
 ## 3. Problemas del enunciado y cómo los resolvemos
@@ -109,7 +109,7 @@ Todo indica que la guía existe y no se compartió. El bloque mal pegado al prin
 | Géneros por libro | 1 → 31 libros · 2 → 103 · 3 → 56 · 4 o más → 10 | **Multi-etiqueta**: afecta la proyección y la definición de "relevante" |
 | Géneros más frecuentes | Novela 83, Fantástico 51, Intriga 33, Terror 27, Romántico 27, Ciencia ficción 26, Drama 26, Juvenil 25 | El piso de azar depende de esto (sección 7) |
 | Largo de la sinopsis | mediana 136 palabras · p90 218 · máximo 455 | Medido en la parte C: con su límite de 128 tokens, **`distiluse` trunca 178 de las 200 sinopsis (89 %)** |
-| Tamaño total | ~29.800 tokens, ~6.900 palabras distintas | Muy poco para entrenar Word2Vec: SBW se entrenó con miles de millones de palabras |
+| Tamaño total | 29.684 palabras; 15.327 sin stopwords, con 6.647 distintas | Muy poco para entrenar Word2Vec: SBW se entrenó con miles de millones de palabras |
 | Series | 89 libros en 67 series (Harry Potter: 4 tomos) | El problema del "tomo 1 → tomos 2 a 7" de la parte avanzada de recomendación |
 | Autores | Stephen King 12, Brandon Sanderson 9, Sarah J. Maas 5 | Riesgo de que "similar" signifique "del mismo autor" |
 | Gallego o catalán | Ninguna: `langdetect` (U3) detecta español en las 200 | La pregunta del enunciado no aplica a nuestro corpus |
@@ -126,7 +126,7 @@ Todo indica que la guía existe y no se compartió. El bloque mal pegado al prin
 - Documentar las decisiones de preprocesamiento como **pérdidas deliberadas de información** (minúsculas, tildes, puntuación, stopwords).
 
 ### Parte A — Corpus en dos versiones
-- **Limpia** (minúsculas, sin puntuación, sin stopwords de NLTK y tokenizada): para TF-IDF y Word2Vec.
+- **Limpia** (minúsculas, sin puntuación, sin stopwords de NLTK y tokenizada): para TF-IDF, el Word2Vec propio y SBW.
 - **Cruda** (texto natural): para el modelo de oración, que usa el orden y las palabras funcionales.
 - Escribir en el notebook **por qué** cada modelo recibe una versión distinta: el preprocesamiento pertenece al modelo, no al corpus.
 
@@ -155,7 +155,6 @@ Todo indica que la guía existe y no se compartió. El bloque mal pegado al prin
 - **Rankings lado a lado** para al menos 3 consultas, con TF-IDF, el promedio de word vectors y SBERT. La práctica de U2 (ejercicio 6) tiene el formato.
 - **Distribución de similitudes entre pares al azar** para cada modelo: media, desvío y rango.
   - Ya vimos en la práctica de U2 que en E5 todo se parece a todo (0,86 a 0,89): un espacio así ordena, pero no discrimina.
-  - Comparar si centrar los embeddings cambia algo, como en la práctica.
 - **Proyección 2D** coloreada por género:
   - Con **PCA**, informar la varianza explicada (en la práctica de U2 fue del 5,8 % con 384 dimensiones).
   - Con **t-SNE**, informar la `perplexity` y advertir que las distancias entre clusters no se interpretan.
@@ -207,6 +206,9 @@ La cátedra las marcó en rojo: no se persiste en Postgres ni se busca en SQL. `
 - **Libros repetidos:** se dejan los 5 pares en el corpus y se anotan juntos en `queries.json` (el notebook lo valida). Los pares con sinopsis distintas se usan como prueba en la parte D.
 - **Etiqueta para la proyección:** un panel por género presente, en lugar de elegir un solo género por libro. Respeta la multi-etiqueta y evita depender del orden alfabético.
 - **k de precision@k:** 5 (es un parámetro del notebook).
+- **Texto para SBW:** la misma versión limpia, en minúsculas, que TF-IDF y el Word2Vec propio: son las dos versiones del texto que pide el enunciado. SBW conoce el 96 % de las palabras; pierde nombres propios que tiene escritos con mayúscula (*Hogwarts*, *Winston*).
+- **Proyección 2D:** PCA para los cinco modelos, con la varianza explicada, y t-SNE para SBERT, con `perplexity` 15.
+- **Código:** la limpieza es la de la práctica de vectorización de U2, y la similitud se calcula con `cosine_similarity` de sklearn, como en el apunte.
 
 - **Parte avanzada:** clustering, hasta que la cátedra lo sacó (2026-10-07). Está guardado en `TP2_BKP_Clustering/` de tuia-nlp.
 - **Segundo modelo de oración:** e5-small. Con su límite de 512 tokens evita casi todo el truncado de la parte C.
@@ -231,7 +233,7 @@ La cátedra las marcó en rojo: no se persiste en Postgres ni se busca en SQL. `
 |---|---|---|---|
 | 1 | Bajar SBW · leer el corpus · **escribir `queries.json`** | — | Sí: las consultas se reparten. Para elegir consultas y relevantes está el **[listado del corpus](listado_corpus.md)**, con un índice por género y una ficha por libro |
 | 2 | Parte 0 y parte A | 1 | — |
-| 3 | TF-IDF, `buscar()` en numpy y evaluación con el piso de azar | 2 | Sí, con el paso 4 |
+| 3 | TF-IDF, `buscar()` y evaluación con el piso de azar | 2 | Sí, con el paso 4 |
 | 4 | Parte B (Word2Vec y SBW) y parte C (SBERT) | 2 | Sí: una persona cada una |
 | 5 | Parte D y precision@k de todos los modelos | 3, 4 | — |
 | 6 | Parte avanzada, si se pide | 4 | — |
@@ -247,7 +249,7 @@ La cátedra las marcó en rojo: no se persiste en Postgres ni se busca en SQL. `
 
 | Tema de U3 | Dónde ayuda en el TP2 |
 |---|---|
-| Métricas de similitud (coseno, Jaccard) | Parte D: Jaccard sobre conjuntos de palabras como otra línea de base léxica |
+| Métricas de similitud (coseno, Jaccard) | Coseno en todas las búsquedas; Jaccard para medir la estabilidad de TF-IDF (pregunta 1) |
 | Detección de idioma (`langdetect`) | Parte 0: la pregunta de las sinopsis en gallego o catalán |
 | NER (spaCy, Stanza) | Parte A: el ejemplo de `Madrid` contra `madrid` al pasar a minúsculas |
 | Clasificación con TF-IDF contra embeddings | Parte 0: el sesgo promocional |

@@ -52,8 +52,6 @@ curl -L -o models/SBW-vectors-300-min5.bin.gz https://cs.famaf.unc.edu.ar/~ccard
 ```
 
 > En PowerShell, `curl` es otro comando: hay que escribir `curl.exe`.
->
-> Si instalaste Python con uv, `py -3.12` no lo encuentra: usá `py -V:Astral/CPython3.12`.
 
 Los dos modelos de oración, `distiluse-base-multilingual-cased-v1` (~540 MB) y
 `intfloat/multilingual-e5-small` (~490 MB), no hace falta bajarlos: `sentence-transformers`

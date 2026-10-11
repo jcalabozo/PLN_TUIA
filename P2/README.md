@@ -30,8 +30,8 @@ src/
   listado_corpus.py                           genera docs/listado_corpus.md
 ```
 
-El corpus se lee de `../P1/data/libros.csv`, el dataset del TP1. Al ejecutar el notebook aparecen
-además `models/` (SBW) y los embeddings calculados en `data/*.npy`; ninguno de los dos se versiona.
+El corpus se lee de `../P1/data/libros.csv`, el dataset del TP1. Ni `models/` (SBW, que se baja en
+la instalación) ni los embeddings que calcula el notebook en `data/*.npy` se versionan.
 
 ## Instalación
 
@@ -39,7 +39,7 @@ Probado con **Python 3.12**.
 
 ```bash
 # 1. Crear y activar un entorno virtual (desde la carpeta P2/)
-py -3 -m venv .venv
+py -3.12 -m venv .venv
 .venv\Scripts\activate          # Windows
 # source .venv/bin/activate     # Linux / macOS
 
@@ -52,6 +52,8 @@ curl -L -o models/SBW-vectors-300-min5.bin.gz https://cs.famaf.unc.edu.ar/~ccard
 ```
 
 > En PowerShell, `curl` es otro comando: hay que escribir `curl.exe`.
+>
+> Si instalaste Python con uv, `py -3.12` no lo encuentra: usá `py -V:Astral/CPython3.12`.
 
 Los dos modelos de oración, `distiluse-base-multilingual-cased-v1` (~540 MB) y
 `intfloat/multilingual-e5-small` (~490 MB), no hace falta bajarlos: `sentence-transformers`

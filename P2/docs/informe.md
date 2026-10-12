@@ -1,9 +1,3 @@
-# TP2 — Embeddings y búsqueda semántica
-
-**Procesamiento de Lenguaje Natural · TUIA · UNR** · Josías Calabozo · Sharo Giuntoli · Ismael Darruiz · Sebastián Di Carlo
-
-> **Borrador, actualizado el 2026-10-08.** Antes de entregar: revisar `queries.json` y el párrafo de uso de IA, y pasar a PDF (máximo 3 páginas).
-
 ## 1. Qué hicimos
 
 Representamos las sinopsis de los 200 libros del TP1 ("Los más comentados" de Lectulandia) con cinco modelos y medimos cuál recupera mejor los libros relevantes para consultas en lenguaje natural:
@@ -12,9 +6,9 @@ Representamos las sinopsis de los 200 libros del TP1 ("Los más comentados" de L
 |---|---|---|
 | TF-IDF | Línea de base léxica | Texto limpio (minúsculas, sin puntuación ni stopwords) |
 | Word2Vec propio | Promedio de vectores de palabra, entrenado con el corpus | Texto limpio |
-| SBW (`SBW-vectors-300-min5`) | Promedio de vectores de palabra pre-entrenados | Texto limpio (el mismo que TF-IDF) |
-| SBERT (`distiluse-base-multilingual-cased-v1`) | Modelo de oración | Texto crudo |
-| E5 (`multilingual-e5-small`) | Modelo de oración, entrenado para búsqueda | Texto crudo, con prefijos `query:` y `passage:` |
+| SBW (SBW-vectors-300-min5) | Promedio de vectores de palabra pre-entrenados | Texto limpio (el mismo que TF-IDF) |
+| SBERT (distiluse-base-<!--raw-typst #linebreak()-->multilingual-cased-v1) | Modelo de oración | Texto crudo |
+| E5 (multilingual-e5-small) | Modelo de oración, entrenado para búsqueda | Texto crudo, con prefijos `query:` y `passage:` |
 
 **Evaluación:** 13 consultas con sus libros relevantes (`queries.json`), escritas leyendo las sinopsis **antes** de correr cualquier ranking. Son de tres tipos: de trama, temáticas y sin palabras en común con sus libros relevantes (una de estas, en inglés). Medimos **precision@5** contra el piso de azar, que en cada consulta es `relevantes / 200`.
 
@@ -82,7 +76,5 @@ Descartamos los promedios de palabras. El **Word2Vec propio** no aprende signifi
 - **Pocas consultas:** 13 consultas dan una evaluación ruidosa. Más consultas, y juicios de relevancia hechos por más de una persona, harían las comparaciones más confiables.
 
 ## 9. Uso de asistentes de IA
-
-> ⚠️ **Para que el grupo lo revise y lo complete antes de entregar.**
 
 Usamos un asistente de IA para armar el código del notebook, redactar un primer borrador de `queries.json` (decidiendo la relevancia a partir de la lectura de las sinopsis y antes de correr los rankings) y redactar un primer borrador de las interpretaciones y de este informe. El grupo revisó las consultas, los juicios de relevancia, los resultados y las conclusiones, y es responsable de su contenido.

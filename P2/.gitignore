@@ -11,6 +11,9 @@ __pycache__/
 # Variables de entorno locales: nunca se suben
 .env
 
+# Datos de la carátula para generar informe.pdf con la plantilla de informe (uso personal)
+docs/caratula.toml
+
 # Modelos descargados y embeddings cacheados (pesados; se regeneran)
 models/
 data/*.npy

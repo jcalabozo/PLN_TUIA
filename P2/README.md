@@ -24,7 +24,8 @@ enunciado/
 data/
   queries.json                                conjunto de evaluación (entregable)
 docs/
-  informe.md                                  borrador del informe
+  informe.md                                  informe en Markdown, del que sale el PDF
+  informe.pdf                                 informe con carátula (entregable)
   listado_corpus.md                           listado del corpus para escribir queries.json
 src/
   listado_corpus.py                           genera docs/listado_corpus.md

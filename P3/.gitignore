@@ -1,0 +1,18 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Variables de entorno locales: nunca se suben
+.env
+
+# Datos de la carátula para generar informe.pdf con la plantilla de informe (uso personal)
+docs/caratula.toml
+
+# Embeddings cacheados (pesados; se regeneran)
+data/*.npy

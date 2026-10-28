@@ -51,7 +51,7 @@ pip install -r requirements.txt
 # 3. Descargar el modelo de spaCy en español (~570 MB, una sola vez)
 python -m spacy download es_core_news_lg
 
-# 4. Registrar el entorno como kernel de Jupyter (opcional, para elegirlo por nombre)
+# 4. Registrar el entorno como kernel de Jupyter (el notebook lo pide por ese nombre)
 python -m ipykernel install --user --name pln-tp3 --display-name "Python 3.12 (PLN TP3)"
 ```
 
@@ -61,8 +61,9 @@ Face (ver el [README del TP2](../P2/README.md#caché-de-hugging-face)).
 
 ## Ejecución
 
-Abrir `TP3_calabozo_giuntoli_darruiz_dicarlo.ipynb` con el entorno creado como kernel y ejecutar
-todas las celdas. El notebook se ejecuta con **`P3/` como carpeta de trabajo**, porque lee y
+Abrir `TP3_calabozo_giuntoli_darruiz_dicarlo.ipynb` con el kernel **Python 3.12 (PLN TP3)** y
+ejecutar todas las celdas. En VS Code está en **Select Kernel → Jupyter Kernel…**, aunque la
+carpeta abierta no sea `P3/`. El notebook se ejecuta con **`P3/` como carpeta de trabajo**, porque lee y
 escribe con rutas relativas (`data/...`). Es lo que hacen Jupyter y VS Code por defecto.
 
 La primera corrida tarda unos 20 minutos en CPU: lo más lento son los embeddings de las más de

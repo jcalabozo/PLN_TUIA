@@ -12,7 +12,7 @@ __pycache__/
 .env
 
 # Datos de la carátula para generar informe.pdf con la plantilla de informe (uso personal)
-docs/caratula.toml
+informe/caratula.toml
 
 # Embeddings cacheados (pesados; se regeneran)
-data/*.npy
+embeddings/

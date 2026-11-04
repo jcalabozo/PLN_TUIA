@@ -14,13 +14,13 @@ Repo del grupo con los trabajos prácticos de Procesamiento de Lenguaje Natural 
 
 ## Criterio común de los TP
 
-Los TP siguen el mismo formato (ver P2 y P3):
+Los TP siguen el mismo formato (ver P3; el TP2, ya entregado, conserva su estructura con `data/` y `docs/`):
 
-- **Notebook** `TP<n>_calabozo_giuntoli_darruiz_dicarlo.ipynb`, ejecutado y con las salidas guardadas. Se ejecuta con `P<n>/` como carpeta de trabajo, porque lee y escribe con rutas relativas; para guardar las salidas sin abrirlo, con `nbclient`.
+- **Notebook** con el nombre que pide la consigna (en el TP3, `TP3_grupo02.ipynb`: somos el grupo 2) o, si no pide ninguno, `TP<n>_calabozo_giuntoli_darruiz_dicarlo.ipynb`, ejecutado y con las salidas guardadas. Se ejecuta con `P<n>/` como carpeta de trabajo, porque lee y escribe con rutas relativas; para guardar las salidas sin abrirlo, con `nbclient`.
 - **Una celda de preparación** con los imports, `SEMILLA = 42` y las rutas.
 - **Después de cada resultado, una celda «Qué muestra»** que lo interpreta con los números reales de la corrida.
-- **Embeddings que tardan en calcularse:** se guardan en `data/*.npy`, que no se versiona.
-- **Carpetas:** `enunciado/` (documentos de la cátedra), `data/` (lo que lee y escribe el notebook) y `docs/` (lo que escribe el grupo, como el informe en `docs/informe.md`).
+- **Embeddings que tardan en calcularse:** se guardan en `embeddings/`, que no se versiona.
+- **Carpetas:** `enunciado/` (enunciado y archivos de ejemplo de la cátedra), `data/` (los datos que lee y escribe el notebook), `entregables/` (lo que pide entregar la consigna, salvo el notebook, que queda en la raíz de `P<n>/`), `informe/` (archivos auxiliares del informe: `informe.md` y la carátula) y `embeddings/`.
 - **Entorno propio por TP:** README con instalación y ejecución, `requirements.txt`, `.gitignore`, un `.venv` creado con `py -3.12 -m venv .venv` (Python 3.12 de python.org, sin uv) y el kernel `pln-tp<n>`.
 - **Uso de IA:** el informe lo declara en dos o tres líneas, como pide la cátedra.
 
